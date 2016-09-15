@@ -1,4 +1,14 @@
 language: csharp
-dotnet: 1.0.0-preview2-003121
-mono: none
 solution: PaypalNETCore.sln
+
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+      dotnet: 1.0.0-preview2-003121
+      mono: none
+      env: DOTNETCORE=1
+
+script:
+  - if [ -z "${DOTNETCORE}" ]; then xbuild /p:Configuration=Release PaypalNETCore.sln; fi
